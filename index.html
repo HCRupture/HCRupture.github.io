@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noah Rogers</title>
+</head>
+<style>
+    body{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: #c6c1ab;
+        background-image: url(source/background.jpg);
+        background-attachment: fixed;
+        background-size: auto 100%;
+        margin: 0;
+    }
+    #wrapper{
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #header {
+        width: 80%;
+        min-height: 55px;
+        margin-top: 5px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        padding-right: 10%;
+    }
+    #button {
+        min-height: 45px;
+        max-width: 300px;
+        background-color: #91897d;
+        margin-left: 10%;
+        margin-right: 10%;
+        text-align: center;
+        font-size: 2rem;
+        color: #464438;
+        display: flex;
+        align-items: center;
+
+        --clr: #555;
+        --outline: 2px solid #555;
+        color: var(--clr);
+        outline: var(--outline);
+        border: var(--outline);
+        outline-offset: -5px;
+        transition: outline-width 200ms ease, outline-offset 200ms ease;
+    }
+    #button p {
+        max-height: 40px;
+        width: 80%;
+        text-align: left;
+        margin: 0%;
+        cursor: pointer;
+    }
+    #button:hover{
+        animation: text-decoration underline;
+    }
+
+    /* Underline header buttons animation */
+    .square {
+        height: 30px;
+        width: 30px;
+        background-color: #555;
+        margin-left: 15px;
+        margin-right: 20px;
+    }
+    #button:hover .square{
+        animation-duration: 0.7s;
+        animation-name: rotate;
+        animation-fill-mode: both;
+    }
+    @keyframes rotate{
+        to {transform: rotate(45deg);}
+    }
+    .underline-animation{
+        display: inline-block;
+        position: relative;
+        color: #605b4a;
+    }
+    .underline-animation::after{
+        content: '';
+        position: absolute;
+        width: 60%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 15%;
+        left: 20%;
+        background-color: #605b4a;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+    .underline-animation:hover::after{
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+
+    /* header buttons border animation */
+    #button:hover, #button:focus{
+        outline: var(--outline);
+        outline-width: 8px;
+        outline-offset: -4px;
+    }
+
+    /* footer */
+    #footer{
+        width: 90%;
+        min-height: 60px;
+        margin-top: auto;
+        margin-bottom:5px;
+        display: inline-flex;
+        flex: 0 1 60px;
+        gap: 30px;
+    }
+    #info {
+        background-color: #403d34;
+        color: #f0ede3;
+        min-width: 200px;
+        max-height: 60px;
+        font-size: 1.5rem;
+        padding-left: 5px;
+        display: flex;
+        align-items: center;
+    }
+    #info p:hover{
+        cursor: pointer;
+    }
+    svg{
+        height: 50px;
+        width: 50px;
+        background-color: #f0ede3;
+        border-radius: 35%;
+        display: flex;
+        margin-right: 10px;
+
+        background-image: linear-gradient(to top, #c7c2ac 50%, transparent 50%);
+        background-size: 100% 200%;
+        background-position: top;
+        transition: background-position 0.3s ease-in-out;
+    }
+    
+    /* Icon shake animation */
+    #info:hover svg{
+        background-position: bottom;
+        animation: shake 0.6s;
+        animation-delay: 0.2s;
+    }
+    @keyframes shake {
+        0%{ transform: rotate(0deg); }
+        20% { transform: rotate(12deg); }
+        30% { transform: rotate(0eg); }
+        40% { transform: rotate(-12deg); }
+        50% { transform: rotate(0deg); }
+        60% { transform: rotate(5deg); }
+        70% { transform: rotate(0eg); }
+        80% { transform: rotate(-5deg); }
+        90% { transform: rotate(0deg); }
+    }
+    svg image{
+        height: 40px;
+        width: 40px;
+        transform: translate(5px, 5px);
+    }
+    a{
+        color: #f0ede3;
+    }
+
+    /* Main Content Area */
+    #content{
+        height: 100%;
+        width: 80%;
+        flex: 1 1 auto;
+        padding-top: 20px;
+    }
+
+    /* About Me */
+    .introduction{
+        margin-left: 5%;
+        margin-right: 5%;
+        line-height: 28px;
+        font-size: 1.6em;
+    }
+    h1{
+        text-align: center;
+        font-size: 3em;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 400;
+    }
+    .profileImage{
+        display: flex;
+        justify-content: center;
+    }
+    .profileFrame{
+        border-radius: 50%;
+        border: solid 4px #403d34;
+        height: 300px;
+        width: 300px;
+        margin: 30px;
+        line-height: 300px;
+        text-align: center;
+    }
+    .profileFrame img{
+        width: 250px;
+        height: 250px;
+    }
+    
+    /* Skills */
+    #gallery {
+        margin: auto;
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    #gallery div{
+        border-radius: 50%;
+        border: solid 4px #403d34;
+        background: radial-gradient(circle at 50% 50%, #8d8879 , #e7ddaf);
+        margin: 30px;
+    }
+    .img-icon {
+        width: 150px;
+        height: 150px;
+        padding: 30px;
+    }
+
+    /* Work */
+    #workDescription{
+        font-size: 18px;
+        border: solid 2px #403d34;
+        padding: 12px;
+        width: 85%;
+        margin: auto;
+        margin-bottom: 30px;
+    }
+    #projDisplay{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+    #img-thumb {
+        width: 55px;
+        height: 55px;
+        margin-right: 10px;
+        margin-bottom: 30px;
+    }
+    #img-thumb:first-child {
+        margin-left: auto;
+    }
+    #img-thumb:hover{
+        opacity: 0.7;
+        cursor: pointer;
+    }
+    #img-thumb:first-child:hover ~ #display {
+        content:url("source/png/loginPage.png")
+    }
+    #img-thumb:nth-child(2):hover ~ #display {
+        content:url("source/png/captchaPage.png")
+    }
+    #img-thumb:nth-child(3):hover ~ #display {
+        content:url("source/png/storePage.png")
+    }
+    #img-thumb:nth-child(4):hover ~ #display {
+        content:url("source/png/adminPage.png")
+    }
+    #display{
+        background-color: #e7ddaf;
+        height: 500px;
+        width: 100%;
+        border: solid 2px black;
+        object-fit: contain;
+    }
+
+    /* Card Style */
+    #card{
+        box-shadow: 5px 5px #625e52;
+        border: solid 2px #403d34;
+        margin: 20px;
+    }
+    #cardHead{
+        background-color: #403d34;
+        font-size: 1.6em;
+        color: #f0ede3;
+        padding-top: 3px;
+        padding-left: 20px;
+        padding-bottom: 3px;
+    }
+    #cardBody{
+        padding: 8px;
+    }
+    .hidden{
+        display: none;
+    }
+</style>
+<script>
+
+    window.onload = function() {
+        let headers = document.querySelectorAll('#button p');
+        headers.forEach(elem => elem.addEventListener("click", handleHeaderClick));
+    }
+
+    function handleHeaderClick(evt) {
+        let selection = evt.target.innerHTML;
+        let res = selection.toLowerCase().split(' ').join('');
+        hideContent(res);
+        showContent(res);
+    }
+
+    function hideContent(res) {
+        let items = document.querySelectorAll('#card');
+        items.forEach(item => item.classList.add('hidden'));
+        if(res !== "aboutme") {
+            document.querySelector('h1').classList.add('hidden');
+            document.querySelector('.profileImage').classList.add('hidden');
+        }
+
+    }
+
+    function showContent(res) {
+        let items = document.querySelectorAll("." + res);
+        items.forEach(item => item.classList.remove('hidden'));
+    }
+
+</script>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <div id="button" class="underline-animation">
+                <div class="square"></div>
+                <p>About Me</p>
+            </div>
+            <div id="button" class="underline-animation">
+                <div class="square"></div>
+                <p>Skills</p>
+            </div>
+            <div id="button" class="underline-animation">
+                <div class="square"></div>
+                <p>Work</p>
+            </div>
+        </div>
+        
+        <div id="content">
+            <div class="profileImage aboutme toggle">
+                <span class="profileFrame">
+                    <img src="source/png/mongodb.pn" alt="Placeholder. Waiting for picture :)">
+                </span>
+            </div>
+            <h1 class="aboutme toggle">Noah Rogers</h1>
+            <div id="card" class="aboutme toggle">
+                <div id="cardHead">
+                    Programmer Analyst
+                </div>
+                <div id="cardBody" class="introduction">
+                    I'm Noah, a programmer Analyst with a few years of experience. Recently, I am discovering my passion for coding using my love for problem solving to create, design and iterate upon solutions in a variety of programming languages. 
+                    I have an interest both in web development and design. I also enjoy analyzing code to find compact and easily understandable solutions to problems.
+                </div>
+            </div>
+
+            <div id="card" class="skills hidden toggle">
+                <div id="cardHead">
+                    Proficiencies & Competencies
+                </div>
+                <div id="cardBody">
+                    <ul>
+                        <li><u>Full Stack Web developement:</u> HTML/CSS/Bootstrap 5.0, asynchronous web development, Javascript/NODE.js, PHP 8.0</li>
+                        <li><u>Object Oriented Programming:</u> Java, C#, Javascript: Object based architecting, inheritance, interfaces, polymorphism, encapsulation, abstraction and aggregation.</li>
+                        <li><u>Database Design & Structuring:</u> SQL - stored procedures, triggers, subqueries, views & cursors. NoSQL - intermediate knowledge with MongoDB</li>
+                        <li><u>Quality Assurance Testing:</u> Producing test requirements from user specifications, detection and documenting of software defects using system test cases, production of automated test cases using varying test design techniques to aid test execution.</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="card" class="skills hidden toggle">
+                <div id="cardHead">
+                    Applications, Software & Frameworks
+                </div>
+                <div id="cardBody">
+                    <div id="gallery">
+                        <div><img src="source/png/mongodb.png" class="img-icon"></div>
+                        <div><img src="source/png/visualstudio.png" class="img-icon"></div>
+                        <div><img src="source/png/github.png" class="img-icon"></div>
+                        <div><img src="source/png/workbench.png" class="img-icon"></div>
+                        <div><img src="source/png/nodejs.png" class="img-icon"></div>
+                        <div><img src="source/png/mocha.png" class="img-icon"></div>
+                        <div><img src="source/png//chaijs.png" class="img-icon"></div>
+                        <div><img src="source/png/react.png" class="img-icon"></div>                    
+                    </div>
+                </div>
+            </div>
+
+            <div id="card" class="work hidden toggle">
+                <div id="cardHead">
+                    C# Windows Forms Application
+                </div>
+                <div id="cardBody">
+                    <h2>Object Oriented Programming - final project</h2>
+                    <p id="workDescription">
+                        Visual C#.NET console application containing multiple forms and user login credentials read from a file. Utilizing different access levels,
+                        a customer may sign into the store and add items to their cart. They will be shown quantities and a total price for all items selected. An 
+                        openFileDialog allows the customer to submit an order and the items are subtracted from the store inventory. a text file is generated for the
+                        customer giving them their receipt. As an admin, they may login to modify, delete and create new products and adjust their quantities handled 
+                        through xml file format.
+                    </p>
+                    <div id="projDisplay">
+                        <img id="img-thumb" src="source/png/loginPage.png"alt="right" />
+                        <img id="img-thumb" src="source/png/captchaPage.png"alt="right" />
+                        <img id="img-thumb" src="source/png/storePage.png"alt="right" />
+                        <img id="img-thumb" src="source/png/adminPage.png"alt="right" />
+                        <div id="display"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <div id="info">
+                <svg>       
+                    <image xlink:href="source/icons/mail.svg"/> 
+                </svg>
+                <a href="mailto:noahrogers45@hotmail.com"><p>EMAIL</p></a>
+            </div>
+            <div id="info">
+                <svg>       
+                    <image xlink:href="source/icons/github.svg"/>    
+                </svg>
+                <a href="https://github.com/HCRupture"><p>GITHUB</p></a>
+            </div>
+            <div id="info">
+                <svg>       
+                    <image xlink:href="source/icons/linkedin.svg"/>    
+                </svg>
+                <a href="https://www.linkedin.com/in/noah-rogers-b324a124b/"><p>LINKEDIN</p></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
